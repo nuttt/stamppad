@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stamppad</title>
+  <link rel="stylesheet" href="css/normailze.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="img/stamppadlogo.gif" alt="">
+    </header>
+    <nav>
+        <ul>
+          <li class="stamp-type stamp-type-star" data-stamp-type="star"></li>
+          <li class="stamp-type stamp-type-heart" data-stamp-type="heart"></li>
+          <li class="stamp-type stamp-type-mickey" data-stamp-type="mickey"></li>
+          <li class="stamp-type stamp-type-paw" data-stamp-type="paw"></li>
+          <li class="stamp-type stamp-type-crown" data-stamp-type="crown"></li>
+        </ul>
+    </nav>
+    <div id="canvas">
+
+    </div>
+  </div>
+
+  <script>
+    $(function(){
+
+      var currentMark = undefined;
+
+      $('.stamp-type').click(function(){
+        currentMark = $(this).data('stamp-type');
+        $('.stamp-type').removeClass('current');
+        $(this).addClass('current');
+      });
+
+      $('#canvas').click(function(e){
+
+        var parentOffset = $(this).offset();
+
+        var relX = e.pageX - parentOffset.left;
+        var relY = e.pageY - parentOffset.top;
+
+        if(currentMark){
+          $(this).append('<div class="stamp-mark stamp-mark-'+currentMark+'" style="top: '+(relY-18)+'px; left: '+(relX-18)+'px;"></div>');
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
